@@ -9,17 +9,18 @@ url = "https://api.ultramsg.com/instance48357/messages/chat"
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST', "GET"])
+@app.route('/', methods=['POST'])
 def home():
     res=""
     if request.method == 'POST':
-        result=json['data']
-        res+=str(resuult)
-        
+        if json["data"] is not None:
+            result=json['data']
+            res+=str(resuult)
 
-        payload = f"token={token}&to=%2B79500310422&body=result"
-        payload = payload.encode('utf8').decode('utf8')#('iso-8859-1')
-        headers = {'content-type': 'application/x-www-form-urlencoded'}
-        response = requests.request("POST", url, data=payload, headers=headers)
-        return ""
-    return res
+            payload = f"token={token}&to=%2B79500310422&body=res"
+            payload = payload.encode('utf8').decode('utf8')#('iso-8859-1')
+            headers = {'content-type': 'application/x-www-form-urlencoded'}
+            response = requests.request("POST", url, data=payload, headers=headers)
+            print(response)
+            return ""
+
