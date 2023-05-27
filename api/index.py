@@ -10,19 +10,19 @@ url = f"https://api.ultramsg.com/instance48357/messages/chat/?token={token}"
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route(f'/{token}', methods=['POST'])
 def home():
     res=""
     if request.method == 'POST':
         msg=request.json
-        if msg["data"] != []:
+        #if msg["data"] != []:
             
-            res+=str(msg['data'])
+        res=str(msg) #str(msg['data'])
 
-            headers = {'content-type': 'application/json'}
-            data = {"to" : chatID, "body" : res} 
-            response = requests.request("POST", url, data=json.dumps(data), headers=headers)
+        headers = {'content-type': 'application/json'}
+        data = {"to" : chatID, "body" : res} 
+        response = requests.request("POST", url, data=json.dumps(data), headers=headers)
 
-            print(response.text)
-            return "ok"
+        print(response.text)
+        return "ok"
 
